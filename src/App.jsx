@@ -4,30 +4,20 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const handleSubmit = () => {
+    console.log("submit works!");
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Simple Authentication</h1>
+      <form onSubmit={handleSubmit} style={{minWidth:'40rem'}}>
+        <div style={{display:'flex', justifyContent:'center', width:'100%', gap:10}}>
+          <input required type="email" placeholder='Email' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
+          <input required type="password" placeholder='Password' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
+        </div>
+        <button type='submit' style={{margin:'2rem', width:'50%'}}>Sign Up</button>
+      </form>
     </>
   )
 }
