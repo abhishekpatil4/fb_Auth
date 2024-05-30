@@ -4,8 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const handleSubmit = () => {
-    console.log("submit works!");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const payload = Object.fromEntries(data);
+    console.log("payload: ", payload);
   }
 
   return (
@@ -13,8 +16,8 @@ function App() {
       <h1>Simple Authentication</h1>
       <form onSubmit={handleSubmit} style={{minWidth:'40rem'}}>
         <div style={{display:'flex', justifyContent:'center', width:'100%', gap:10}}>
-          <input required type="email" placeholder='Email' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
-          <input required type="password" placeholder='Password' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
+          <input name="email" required type="email" placeholder='Email' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
+          <input name="password" required type="password" placeholder='Password' style={{width:'15rem', height:'2.2rem', paddingLeft:'10px'}}/>
         </div>
         <button type='submit' style={{margin:'2rem', width:'50%'}}>Sign Up</button>
       </form>
