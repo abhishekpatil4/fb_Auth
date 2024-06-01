@@ -5,6 +5,8 @@ import './App.css'
 import { auth } from './config/firebase'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Audio } from 'react-loader-spinner';
+import { enqueueSnackbar } from 'notistack'
+
 
 
 function App() {
@@ -13,11 +15,11 @@ function App() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setAdding(false);
-      alert("User added successfully!");
+      enqueueSnackbar("Signup successfull", { variant: 'success', anchorOrigin: { vertical: 'bottom', horizontal: 'center' } });
     } catch (error) {
       console.error(error);
       setAdding(false);
-      alert(error);
+      enqueueSnackbar(`Signup unsuccessfull:: ${error.message}`, { variant: 'error', anchorOrigin: { vertical: 'bottom', horizontal: 'center' } });
     }
   }
 
@@ -37,9 +39,9 @@ function App() {
           <input name="email" required type="email" placeholder='Email' style={{ width: '15rem', height: '2.2rem', paddingLeft: '10px' }} />
           <input name="password" required type="password" placeholder='Password' style={{ width: '15rem', height: '2.2rem', paddingLeft: '10px' }} />
         </div>
-        <button type='submit' style={{ margin: '2rem', width: '50%', textAlign: 'center' }}>
+        <button disabled={adding?true:false} type='submit' style={{ margin: '2rem', width: '50%', textAlign: 'center', border:adding&&'none' }}>
           {adding ?
-            <div style={{display:'flex', justifyContent:'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Audio
                 height="15"
                 width="15"
